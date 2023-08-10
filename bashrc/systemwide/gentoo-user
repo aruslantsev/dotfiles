@@ -1,0 +1,41 @@
+if [ -n "${BASH_VERSION-}" ] ; then
+	# Newer bash ebuilds include /etc/bash/bashrc which will setup PS1
+	# including color.  We leave out color here because not all
+	# terminals support it.
+	if [ -f /etc/bash/bashrc ] ; then
+		# Bash login shells run only /etc/profile
+		# Bash non-login shells run only /etc/bash/bashrc
+		# Since we want to run /etc/bash/bashrc regardless, we source it 
+		# from here.  It is unfortunate that there is no way to do 
+		# this *after* the user's .bash_profile runs (without putting 
+		# it in the user's dot-files), but it shouldn't make any 
+		# difference.
+		. /etc/bash/bashrc
+	else
+		PS1='\u@\h \w \$ '
+	fi
+else
+	# Setup a bland default prompt.  Since this prompt should be useable
+	# on color and non-color terminals, as well as shells that don't
+	# understand sequences such as \h, don't put anything special in it.
+	PS1="${USER:-$(whoami 2>/dev/null)}@$(uname -n 2>/dev/null) \$ "
+fi
+
+# /etc/skel/.bashrc
+#
+# This file is sourced by all *interactive* bash shells on startup,
+# including some apparently interactive shells such as scp and rcp
+# that can't tolerate any output.  So make sure this doesn't display
+# anything or bad things will happen !
+
+
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+if [[ $- != *i* ]] ; then
+	# Shell is non-interactive.  Be done now!
+	return
+fi
+
+
+# Put your fun stuff here.

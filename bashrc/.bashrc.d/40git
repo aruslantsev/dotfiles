@@ -1,0 +1,13 @@
+source ~/.bashrc.d/git_prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+# Main idea - replace last $ with output of __git_ps1 and $
+
+# Easiest way. Insert __git_ps1 before last $. It will have the same color as $ 
+# export PS1=$(echo $PS1 | sed 's/\(.*\) \\\$/\1\`__git_ps1\` \\\$ /')
+
+# Change color to orange, insert __git_ps1, change color to white -> Orange git branch and white $
+# export PS1=$(echo $PS1 | sed 's/\(.*\) \\\$/\1\\\[\\e\[93m\\\]\`__git_ps1\` \\\[\\e[0m\\\]\\\$ /')
+
+# Change color to orange, insert __git_ps1, change color to blue -> Orange git branch and blue $
+export PS1=$(echo $PS1 | sed 's/\(.*\) \\\$/\1\\\[\\e\[93m\\\]\`__git_ps1\` \\\[\\033\[01;34m\\\]\\\$ /')
