@@ -8,7 +8,7 @@ source ~/.bashrc.d/00path
 source ~/.bashrc.d/01aliases
 source ~/.bashrc.d/10ssh-agent
 source ~/.bashrc.d/20time
-source ~/.bashrc.d/30exitcode
+source ~/.bashrc.d/30execution-info
 source ~/.bashrc.d/40git
 # source ~/.bashrc.d/90conda
 ```
