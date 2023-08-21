@@ -1,0 +1,35 @@
+function convert_time {
+	local t=$1
+
+	local d=$((t/60/60/24))
+	local h=$((t/60/60%24))
+	local m=$((t/60%60))
+	local s=$((t%60))
+
+	timestr=""
+	if [[ $d > 0 ]]; then
+		timestr="${timestr}${d}d"
+	fi
+	if [[ $h > 0 ]] || [[ $d > 0 ]]; then
+		timestr="${timestr}${h}h"
+	fi
+	if [[ $m > 0 ]] || [[ $h > 0 ]] || [[ $d > 0 ]]; then
+		timestr="${timestr}${m}m"
+	fi
+	timestr="${timestr}${s}s"
+}
+
+function timer_start {
+	timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+	timer_show=$(($SECONDS - $timer))
+	convert_time timer_show
+	unset timer
+}
+
+trap 'timer_start' DEBUG
+PROMPT_COMMAND=timer_stop
+
+PS1="\`exitcode=\$?; if [ \$exitcode = 0 ]; then echo \[\e[92m\e[1m\][\$exitcode\|\${timestr}]\[\e[0m\]; else echo \[\e[91m\e[1m\][\$exitcode\|\${timestr}]\[\e[0m\]; fi\` ${PS1}"

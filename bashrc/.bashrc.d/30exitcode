@@ -1,1 +1,0 @@
-PS1="\`if [ \$? = 0 ]; then echo \[\e[92m\e[1m\][v]\[\e[0m\]; else echo \[\e[91m\e[1m\][x]\[\e[0m\]; fi\` ${PS1}"
