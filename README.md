@@ -1,11 +1,13 @@
 # Dotfiles
 
-just add strings to `~/.bashrc`
+Just add strings to `~/.bashrc` and uncomment only needed
 
 ```
-source ~/.bashrc.d/00path
-source ~/.bashrc.d/00ps1-multiline
-source ~/.bashrc.d/02aliases
-source ~/.bashrc.d/10ssh-agent
-# source ~/.bashrc.d/90conda
+source ~/.dotfiles/00path
+# source ~/.dotfiles/01ps1-simple
+source ~/.dotfiles/01ps1-multiline
+# source ~/.dotfiles/01ps1-singleline
+source ~/.dotfiles/02aliases
+source ~/.dotfiles/10ssh-agent
+# source ~/.dotfiles/90conda
 ```
