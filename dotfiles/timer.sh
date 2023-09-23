@@ -17,6 +17,7 @@ function convert_time {
 		timestr="${timestr}${m}m"
 	fi
 	timestr="${timestr}${s}s"
+	echo "${timestr}"
 }
 
 function timer_start {
@@ -25,11 +26,12 @@ function timer_start {
 
 function timer_stop {
 	timer_show=$(($SECONDS - $timer))
-	convert_time timer_show
 	unset timer
+}
+
+function get_exectime {
+	convert_time timer_show
 }
 
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
-
-PS1="\`exitcode=\$?; if [ \$exitcode = 0 ]; then echo \[\e[92m\e[1m\][\$exitcode\|\${timestr}]\[\e[0m\]; else echo \[\e[91m\e[1m\][\$exitcode\|\${timestr}]\[\e[0m\]; fi\` ${PS1}"
