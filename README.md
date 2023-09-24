@@ -3,6 +3,7 @@
 Just add strings to `~/.bashrc` and uncomment only needed
 
 ```
+export NO_DEVTOOLS=1
 source ~/.dotfiles/00path
 # source ~/.dotfiles/01ps1-simple
 source ~/.dotfiles/01ps1-multiline
