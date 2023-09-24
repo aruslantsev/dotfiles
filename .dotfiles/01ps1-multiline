@@ -7,7 +7,7 @@ else
 	EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${GREEN}\"; else echo -n \"${RED}\"; fi; echo -n \"[\${exitcode}]\"; echo \"${RESET}\")"
 fi
 
-if [ -f ~/.dotfiles/devtools.sh ]; then
+if [ -f ~/.dotfiles/devtools.sh ] && [ -z ${NO_DEVTOOLS} ]; then
 	source ~/.dotfiles/devtools.sh
 	DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \"\n│  ${GREY}\${status_str}${RESET}\"; else echo -n; fi)"
 else
