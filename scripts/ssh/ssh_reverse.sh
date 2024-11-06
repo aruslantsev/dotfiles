@@ -11,7 +11,7 @@ then
 	# ssh agent is not running
 	KILL_AGENT=1
 else
-	# ssh agent is runninga
+	# ssh agent is running
 	KILL_AGENT=0
 fi
 
