@@ -14,6 +14,7 @@ kde-plasma/kwin lock # plasma-meta
 kde-plasma/plasma-meta -crypt -desktop-portal thunderbolt
 media-fonts/noto -extra
 media-libs/phonon qt6 # plasma-meta
+media-libs/phonon-vlc qt6 # phonon
 net-libs/kdsoap qt6
 sys-auth/polkit introspection
 sys-auth/polkit-qt qt6 # polkit-kde-agent
@@ -21,4 +22,4 @@ sys-libs/zlib minizip # plasma-meta
 x11-base/xwayland libei # kwin
 
 media-video/vlc -gui
-net-p2p/qbittorrent qt6 -dbus
+net-p2p/qbittorrent qt6

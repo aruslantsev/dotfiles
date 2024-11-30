@@ -9,10 +9,13 @@ app-misc/fdupes
 app-misc/mc
 app-misc/symlinks
 app-misc/tmux
+app-misc/wayland-utils
 app-office/libreoffice
+app-portage/cpuid2cpuflags
 app-portage/gentoolkit
 app-shells/bash-completion
 dev-debug/strace
+dev-util/vulkan-tools
 dev-vcs/git
 kde-apps/ark
 kde-apps/dolphin
@@ -41,6 +44,7 @@ media-libs/libva-intel-media-driver
 media-sound/alsa-tools
 media-sound/alsa-utils
 media-sound/pavucontrol-qt
+media-video/libva-utils
 net-analyzer/nmap
 net-analyzer/traceroute
 net-firewall/nftables
@@ -65,6 +69,7 @@ sys-firmware/sof-firmware
 sys-fs/cryptsetup
 sys-fs/dosfstools
 sys-fs/exfatprogs
+sys-fs/fuse:0
 sys-fs/lvm2
 sys-fs/mdadm
 sys-kernel/dracut
@@ -78,3 +83,6 @@ sys-process/cronie
 sys-process/htop
 sys-process/lsof
 www-client/firefox-bin
+x11-apps/igt-gpu-tools
+x11-apps/mesa-progs
+x11-apps/xdpyinfo
