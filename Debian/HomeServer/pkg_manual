@@ -1,5 +1,6 @@
 acpid
 anacron
+apparmor
 apt-forktracer
 aptitude
 avahi-daemon
@@ -11,14 +12,15 @@ cryptsetup
 curl
 debootstrap
 deborphan
+disks-spindown
 dmidecode
 docker-compose
 docker.io
 dosfstools
 efitools
 fdisk
+fdupes
 firmware-linux
-git
 grub-efi-amd64
 hdparm
 htop
