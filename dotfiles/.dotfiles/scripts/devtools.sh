@@ -29,7 +29,7 @@ else
 	}
 fi
 
-if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] && [ $(which git) ]; then
+if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] && [ $(which git 2> /dev/null) ]; then
 	source ~/.dotfiles/scripts/git_prompt.sh
 	export GIT_PS1_SHOWDIRTYSTATE=1
 	export GIT_PS1_SHOWSTASHSTATE=1
