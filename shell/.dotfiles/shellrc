@@ -13,10 +13,13 @@ export RUN_SSH_AGENT=1
 export SHOW_GIT_STATUS=1
 # Show conda environment in prompt
 export SHOW_CONDA_STATUS=1
+# Show ESP IDF version
+export SHOW_IDF_STATUS=1
 
 # Do not save command history
 unset HISTFILE
 
 source ~/.dotfiles/scripts/main
 
-# Aliases can be set in ~/.dotfiles/bash_aliases
+# Aliases can be set in ~/.{bash,zsh}_aliases
+# Environment variables can be set in ~/.environment

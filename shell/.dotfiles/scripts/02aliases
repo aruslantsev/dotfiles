@@ -1,5 +1,5 @@
-. ~/.dotfiles/bash_aliases
+source ~/.dotfiles/aliases
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.${SHELL##*/}_aliases ]; then
+	source ~/.${SHELL##*/}_aliases
 fi

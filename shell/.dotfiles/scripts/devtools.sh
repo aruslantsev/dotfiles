@@ -38,10 +38,23 @@ else
 	}
 fi
 
+if [ ${SHOW_IDF_STATUS:-0} -eq 1 ]; then
+	function get_idf_version {
+		if [ ! -z "${ESP_IDF_VERSION}" ]; then
+			echo "ESP IDF: ${ESP_IDF_VERSION}"
+		fi
+	}
+else
+	function get_idf_version {
+		echo -n
+	}
+fi
+
 function get_devtools_str {
 	STATUS_STR=""
 	git_status="$(get_git_status)"
 	conda_env="$(get_conda_env)"
+	idf_version="$(get_idf_version)"
 	if [ -n "${git_status}" ]; then
 		STATUS_STR="${STATUS_STR}${git_status}"
 	fi
@@ -50,6 +63,12 @@ function get_devtools_str {
 			STATUS_STR="${STATUS_STR} | "
 		fi
 		STATUS_STR="${STATUS_STR}${conda_env}"
+	fi
+	if [ -n "${idf_version}" ]; then
+		if [ -n "${STATUS_STR}" ]; then
+			STATUS_STR="${STATUS_STR} | "
+		fi
+		STATUS_STR="${STATUS_STR}${idf_version}"
 	fi
 	if [ -n "${STATUS_STR}" ]; then
 		echo "${STATUS_STR}"

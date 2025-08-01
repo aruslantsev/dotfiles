@@ -22,6 +22,7 @@ if [ $UID = 0 ]; then
 else
 	PS1="\[\e]0;\u@\h:\w\a\]${GREEN}\u@\h ${BLUE}\w \\\$${RESET}"
 fi
+
 PS1="┌─ ${EXITCODE} ${TIME} ${SYSTEM_LOAD} ${DEVTOOLS_STR}\n└─ ${SSH}${PS1} "
 
 # ┌─┬─┐
