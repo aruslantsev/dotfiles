@@ -1,12 +1,20 @@
 source ~/.dotfiles/scripts/00path
 
-if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
-	source ~/.dotfiles/scripts/01ps1-simple
-elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
-	source ~/.dotfiles/scripts/01ps1-multiline
-else
-	source ~/.dotfiles/scripts/01ps1-singleline
-fi
+case ${SHELL##*/} in
+	"bash")
+		if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
+			source ~/.dotfiles/scripts/01ps1-simple-bash
+		elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
+			source ~/.dotfiles/scripts/01ps1-multiline-bash
+		else
+			source ~/.dotfiles/scripts/01ps1-singleline-bash
+		fi
+		;;
+	"zsh")
+		;;
+	*)
+		echo "Unsupported shell ${SHELL##*/}"
+esac
 
 source ~/.dotfiles/scripts/02aliases
 source ~/.dotfiles/scripts/03environment
