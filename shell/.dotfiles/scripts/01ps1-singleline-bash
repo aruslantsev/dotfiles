@@ -3,7 +3,7 @@ source ~/.dotfiles/scripts/timer
 
 EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${GREEN}\"; else echo -n \"${RED}\"; fi; echo -n \"[\${exitcode}|\$(get_exectime)]\"; echo \"${RESET}\")"
 
-if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] || [ ${SHOW_CONDA_STATUS:-0} -eq 1 ]; then
+if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] || [ ${SHOW_CONDA_STATUS:-0} -eq 1 ] || [ ${SHOW_IDF_STATUS:-0} -eq 1 ]; then
 	source ~/.dotfiles/scripts/devtools
 	DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \" ${GREY}\${status_str}${RESET}\"; else echo -n; fi)"
 else
