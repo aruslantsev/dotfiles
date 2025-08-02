@@ -1,9 +1,9 @@
 # Dotfiles
 
-Add to `~/.bashrc`
+Add to `~/.{bash,zsh}rc`
 
 ```
-source ~/.dotfiles/bashrc
+source ~/.dotfiles/shellrc
 ```
 
-Change settings in `~/.dotfiles/bashrc`
+Change settings in `~/.dotfiles/shellrc`

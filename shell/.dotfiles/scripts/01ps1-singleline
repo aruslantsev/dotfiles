@@ -1,22 +1,44 @@
-source ~/.dotfiles/scripts/colors.sh
-source ~/.dotfiles/scripts/timer.sh
+if [ "${SHELL##*/}" = "zsh" ]; then setopt PROMPT_SUBST; fi
 
-EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${GREEN}\"; else echo -n \"${RED}\"; fi; echo -n \"[\${exitcode}|\$(get_exectime)]\"; echo \"${RESET}\")"
+source ~/.dotfiles/scripts/colors
+source ~/.dotfiles/scripts/timer
 
-if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] || [ ${SHOW_CONDA_STATUS:-0} -eq 1 ]; then
-	source ~/.dotfiles/scripts/devtools.sh
-	DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \" ${GREY}\${status_str}${RESET}\"; else echo -n; fi)"
+EXITCODE='$(exitcode=$?; if [ ${exitcode} = 0 ]; then echo -ne "${GREEN}"; else echo -ne "${RED}"; fi; echo -n "[${exitcode}|$(get_exectime)]"; echo -e "${RESET}")'
+
+
+if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] || [ ${SHOW_CONDA_STATUS:-0} -eq 1 ] || [ ${SHOW_IDF_STATUS:-0} -eq 1 ]; then
+	source ~/.dotfiles/scripts/devtools
+	DEVTOOLS_STR='$(status_str=$(get_devtools_str); if [ -n "${status_str}" ]; then echo -e " ${GREY}${status_str}${RESET}"; else echo -n; fi)'
 else
-	DEVTOOLS_STR=""
+	DEVTOOLS_STR=''
 fi
 
-TIME="${GREY}\D{%F %T}.${RESET}"
+case "${SHELL##*/}" in
+	"bash")
+		TIME='$(echo -e ${GREY}\D{%F %T}.${RESET})'
+		;;
+	"zsh")
+		TIME='${GREY}%D{%F %T}.${RESET}'
+		;;
+esac
 
-SSH="\$(if [ ! -z \"\${SSH_CONNECTION}\" ]; then echo \"${YELLOW}[SSH]${RESET} \"; fi)"
+SSH='$(if [ ! -z "${SSH_CONNECTION}" ]; then echo -e "${YELLOW}[SSH]${RESET} "; fi)'
 
-if [ $UID = 0 ]; then
-	PS1="\[\e]0;\u@\h:\w\a\]${RED}\h ${BLUE}\w \\\$${RESET}"
-else
-	PS1="\[\e]0;\u@\h:\w\a\]${GREEN}\u@\h ${BLUE}\w \\\$${RESET}"
-fi
+case "${SHELL##*/}" in
+	"bash")
+		if [ $UID = 0 ]; then
+			PS1='$(echo -e "\[\e]0;\u@\h:\w\a\]${RED}\h ${BLUE}\w \$${RESET}")'
+		else
+			PS1='$(echo -e "\[\e]0;\u@\h:\w\a\]${GREEN}\u@\h ${BLUE}\w \$${RESET}")'
+		fi
+		;;
+	"zsh")
+		if [ $UID = 0 ]; then
+			PS1='${RED}%n@%m ${BLUE}%~ %#${RESET}'
+		else
+			PS1='${GREEN}%n@%m ${BLUE}%~ %#${RESET}'
+		fi
+		;;
+esac
+
 PS1="${EXITCODE} ${SSH}${TIME}${DEVTOOLS_STR} ${PS1} "
