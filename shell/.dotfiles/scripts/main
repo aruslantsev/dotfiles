@@ -1,22 +1,13 @@
 source ~/.dotfiles/scripts/00path
 
 case ${SHELL##*/} in
-	"bash")
+	"bash" | "zsh")
 		if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
-			source ~/.dotfiles/scripts/01ps1-simple-bash
+			source ~/.dotfiles/scripts/01ps1-simple
 		elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
-			source ~/.dotfiles/scripts/01ps1-multiline-bash
+			source ~/.dotfiles/scripts/01ps1-multiline
 		else
-			source ~/.dotfiles/scripts/01ps1-singleline-bash
-		fi
-		;;
-	"zsh")
-		if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
-			source ~/.dotfiles/scripts/01ps1-simple-zsh
-		elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
-			source ~/.dotfiles/scripts/01ps1-multiline-zsh
-		else
-			; # source ~/.dotfiles/scripts/01ps1-singleline-zsh
+			source ~/.dotfiles/scripts/01ps1-singleline
 		fi
 		;;
 	*)
