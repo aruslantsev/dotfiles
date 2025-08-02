@@ -27,9 +27,9 @@ if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] && [ $(which git 2> /dev/null) ]; then
 	export GIT_PS1_SHOWUPSTREAM=auto
 
 	function get_git_status {
-		status=$(__git_ps1)
-		if [ -n "${status}" ]; then
-			echo "Git: ${status}" | xargs
+		git_status=$(__git_ps1)
+		if [ -n "${git_status}" ]; then
+			echo "Git: ${git_status}" | xargs
 		fi
 	}
 else

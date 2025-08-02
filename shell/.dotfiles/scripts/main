@@ -11,6 +11,13 @@ case ${SHELL##*/} in
 		fi
 		;;
 	"zsh")
+		if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
+			source ~/.dotfiles/scripts/01ps1-simple-zsh
+		elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
+			source ~/.dotfiles/scripts/01ps1-multiline-zsh
+		else
+			; # source ~/.dotfiles/scripts/01ps1-singleline-zsh
+		fi
 		;;
 	*)
 		echo "Unsupported shell ${SHELL##*/}"
