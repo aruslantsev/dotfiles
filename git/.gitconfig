@@ -1,15 +1,16 @@
-[user]
+\[user]
 	name = User Name
 	email = username@example.com
 	signingkey = ~/.ssh/id_ed25519.pub
 [core]
 	excludesfile = ~/.gitignore
 	autocrlf = input
+	symlilnks = true
 [alias]
 	clean-branches = !git pull -p && git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D
 	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
-[column]
-	ui = auto
+# [column]
+# 	ui = auto
 [branch]
 	sort = -committerdate
 [tag]
@@ -48,3 +49,5 @@
 	gpgsign = true
 [format]
 	pretty = format:%C(cyan bold)%H%C(reset) %ci %C(italic)(%cr)%C(reset) %C(blue)%cn%C(reset) %C(auto,bold)%G?(%GT)%C(reset) %C(green)%s%C(magenta)%d%C(reset) %C(red)(%an)%C(reset) %C(yellow)[%p]%C(reset)
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed-signers
