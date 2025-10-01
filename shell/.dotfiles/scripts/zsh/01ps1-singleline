@@ -29,5 +29,4 @@ if [ "$IS_ROOT" = 1 ]; then
 else
 	PS1='${GREEN}%n@%m ${BLUE}%~ %#${RESET}'
 fi
-
 PS1="${EXITCODE} ${SSH}${TIME}${DEVTOOLS_STR} ${PS1} "

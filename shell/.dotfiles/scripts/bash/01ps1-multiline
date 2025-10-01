@@ -25,13 +25,6 @@ TIME="${GREY}\D{%F %T}.${RESET}"
 
 SSH="\$(if [ ! -z \"\${SSH_CONNECTION}\" ]; then echo \"${YELLOW}[SSH]${RESET} \"; fi)"
 
-if [ -z "$UID" ]; then
-	if [ $(whoami) = "root" ]; then
-		UID=0
-	else
-		UID=1
-	fi
-fi
 if [ "$IS_ROOT" = 1 ]; then
 	PS1="\[\e]0;\u@\h:\w\a\]${RED}\h ${BLUE}\w \\\$${RESET}"
 else
