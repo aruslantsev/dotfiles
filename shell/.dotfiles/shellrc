@@ -17,9 +17,9 @@ export SHOW_CONDA_STATUS=1
 export SHOW_IDF_STATUS=1
 
 # Do not save command history
-unset HISTFILE
+export SAVE_HISTORY=0
 
-source ~/.dotfiles/scripts/main
+. ~/.dotfiles/scripts/main
 
 # Aliases can be set in ~/.{bash,zsh}_aliases or ~/.aliases
 # Environment variables can be set in ~/.environment
