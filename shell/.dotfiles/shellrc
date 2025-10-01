@@ -21,5 +21,5 @@ unset HISTFILE
 
 source ~/.dotfiles/scripts/main
 
-# Aliases can be set in ~/.{bash,zsh}_aliases
+# Aliases can be set in ~/.{bash,zsh}_aliases or ~/.aliases
 # Environment variables can be set in ~/.environment

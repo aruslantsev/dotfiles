@@ -1,3 +1,19 @@
+if [ -z "$OSTYPE" ]; then
+	echo "OSTYPE is not set. Guessing..."
+	os_name=$(uname)
+	case ${os_name} in
+		"Linux")
+			OSTYPE="linux-gnu"
+			;;
+		"Darwin")
+			OSTYPE="darwin"
+			;;
+		*)
+			echo "Unknown system"
+	esac
+fi
+
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	# total_cpus=$(grep processor /proc/cpuinfo | wc -l)
 	total_mem_mb=$(free -m | awk 'NR==2{printf $2 }')

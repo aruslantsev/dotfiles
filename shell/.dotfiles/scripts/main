@@ -1,7 +1,7 @@
 source ~/.dotfiles/scripts/00path
 
 case ${SHELL##*/} in
-	"bash" | "zsh")
+	"bash" | "zsh" | "sh")
 		if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
 			source ~/.dotfiles/scripts/${SHELL##*/}/01ps1-simple
 		elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
