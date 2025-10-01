@@ -3,6 +3,6 @@ if [ -d ~/.local/bin ]; then
 fi
 
 if [ -f ~/.paths ]; then
-	source ~/.paths
+	. ~/.paths
 fi
 

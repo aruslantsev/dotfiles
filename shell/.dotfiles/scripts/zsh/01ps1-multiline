@@ -2,18 +2,26 @@ setopt PROMPT_SUBST
 
 NEWLINE=$'\n'
 
-source ~/.dotfiles/scripts/zsh/colors
-source ~/.dotfiles/scripts/timer
-source ~/.dotfiles/scripts/system
+. ~/.dotfiles/scripts/zsh/colors
+. ~/.dotfiles/scripts/timer
+. ~/.dotfiles/scripts/system
+. ~/.dotfiles/scripts/devtools
 
-EXITCODE='$(exitcode=$?; if [ ${exitcode} = 0 ]; then echo -ne "${GREEN}"; else echo -ne "${RED}"; fi; echo -n "[${exitcode}|$(get_exectime)]"; echo -e "${RESET}")'
-
-if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] || [ ${SHOW_CONDA_STATUS:-0} -eq 1 ] || [ ${SHOW_IDF_STATUS:-0} -eq 1 ]; then
-	source ~/.dotfiles/scripts/devtools
-	DEVTOOLS_STR='$(status_str=$(get_devtools_str); if [ -n "${status_str}" ]; then echo -e "${NEWLINE}│  ${GREY}${status_str}${RESET}"; else echo -n; fi)'
+if [ "$UID" = 0 ] || [ $(whoami) = "root" ]; then
+	IS_ROOT=1
 else
-	DEVTOOLS_STR=''
+	IS_ROOT=0
 fi
+if [ "$IS_ROOT" = 1 ]; then
+	OK_COLOR=$GREY
+else
+	OK_COLOR=$GREEN
+fi
+ERR_COLOR=$RED
+
+EXITCODE='$(exitcode=$?; if [ ${exitcode} = 0 ]; then echo -ne "${OK_COLOR}"; else echo -ne "${ERR_COLOR}"; fi; echo -n "[${exitcode}|$(get_exectime)]"; echo -e "${RESET}")'
+
+DEVTOOLS_STR='$(status_str=$(get_devtools_str); if [ -n "${status_str}" ]; then echo -e "${NEWLINE}│  ${GREY}${status_str}${RESET}"; else echo -n; fi)'
 
 SYSTEM_LOAD='$(echo -e "${GREY}$(get_system_load)${RESET}")'
 
@@ -21,7 +29,7 @@ TIME='${GREY}%D{%F %T}.${RESET}'
 
 SSH='$(if [ ! -z "${SSH_CONNECTION}" ]; then echo -e "${YELLOW}[SSH]${RESET} "; fi)'
 
-if [ $UID = 0 ]; then
+if [ "$IS_ROOT" = 1 ]; then
 	PS1='${RED}%n@%m ${BLUE}%~ %#${RESET}'
 else
 	PS1='${GREEN}%n@%m ${BLUE}%~ %#${RESET}'

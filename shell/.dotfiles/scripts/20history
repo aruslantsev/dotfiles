@@ -1,0 +1,10 @@
+case ${SHELL##*/} in
+	"bash" | "zsh")
+		unset HISTFILE
+		;;
+	"sh")
+		HISTFILE=/dev/null
+		;;
+	"*")
+		echo "Unknown shell"
+esac

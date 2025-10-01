@@ -1,4 +1,4 @@
-function convert_time {
+convert_time () {
 	local t=$1
 
 	local d=$((t/60/60/24))
@@ -20,16 +20,16 @@ function convert_time {
 	echo "${timestr}"
 }
 
-function timer_start {
+timer_start () {
 	timer=${timer:-$SECONDS}
 }
 
-function timer_stop {
+timer_stop () {
 	timer_show=$(($SECONDS - ${timer:-$SECONDS}))
 	unset timer
 }
 
-function get_exectime {
+get_exectime () {
 	convert_time timer_show
 }
 
@@ -39,10 +39,10 @@ case ${SHELL##*/} in
 		PROMPT_COMMAND=timer_stop
 		;;
 	"zsh")
-		function preexec() {
+		preexec() {
 			timer_start
 		}
-		function precmd () {
+		precmd () {
 			timer_stop
 		}
 		;;

@@ -1,14 +1,22 @@
-source ~/.dotfiles/scripts/sh/colors
-source ~/.dotfiles/scripts/system
+. ~/.dotfiles/scripts/sh/colors
+. ~/.dotfiles/scripts/system
+. ~/.dotfiles/scripts/devtools
 
-EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${GREEN}\"; else echo -n \"${RED}\"; fi; echo -n \"[\${exitcode}]\"; echo \"${RESET}\")"
-
-if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] || [ ${SHOW_CONDA_STATUS:-0} -eq 1 ]; then
-	source ~/.dotfiles/scripts/devtools
-	DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \"\n│  ${GREY}\${status_str}${RESET}\"; else echo -n; fi)"
+if [ "$UID" = 0 ] || [ $(whoami) = "root" ]; then
+	IS_ROOT=1
 else
-	DEVTOOLS_STR=""
+	IS_ROOT=0
 fi
+if [ "$IS_ROOT" = 1 ]; then
+	OK_COLOR=$GREY
+else
+	OK_COLOR=$GREEN
+fi
+ERR_COLOR=$RED
+
+EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}]\"; echo \"${RESET}\")"
+
+DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \"\n│  ${GREY}\${status_str}${RESET}\"; else echo -n; fi)"
 
 SYSTEM_LOAD="${GREY}\$(get_system_load)${RESET}"
 
@@ -16,7 +24,16 @@ TIME="${GREY}\$(date +\"%F %T\").${RESET}"
 
 SSH="\$(if [ ! -z \"\${SSH_CONNECTION}\" ]; then echo \"${YELLOW}[SSH]${RESET} \"; fi)"
 
-if [ $(whoami) = "root" ]; then
+
+if [ -z "$UID" ]; then
+	if [ $(whoami) = "root" ]; then
+		UID=0
+	else
+		UID=1
+	fi
+fi
+
+if [ "$IS_ROOT" = 1 ]; then
 	PS1="\[\e]0;\u@\h:\w\a\]${RED}\h ${BLUE}\w \\\$${RESET}"
 else
 	PS1="\[\e]0;\u@\h:\w\a\]${GREEN}\u@\h ${BLUE}\w \\\$${RESET}"
