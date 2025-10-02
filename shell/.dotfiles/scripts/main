@@ -1,26 +1,40 @@
-. ~/.dotfiles/scripts/00path
+if [ "$UID" = 0 ] || [ $(whoami) = "root" ]; then
+	IS_ROOT=1
+else
+	IS_ROOT=0
+fi
 
 case ${SHELL##*/} in
-	"bash" | "zsh" | "sh")
-		if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
-			. ~/.dotfiles/scripts/${SHELL##*/}/01ps1-simple
-		elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
-			. ~/.dotfiles/scripts/${SHELL##*/}/01ps1-multiline
-		else
-			. ~/.dotfiles/scripts/${SHELL##*/}/01ps1-singleline
-		fi
+	"bash" | "sh")
+		. ~/.dotfiles/scripts/colors-sh
+		;;
+	"zsh")
+		. ~/.dotfiles/scripts/colors-zsh
 		;;
 	*)
 		echo "Unsupported shell ${SHELL##*/}"
 esac
 
+. ~/.dotfiles/scripts/00path
+
+if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
+	. ~/.dotfiles/scripts/01ps1-simple
+elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
+	. ~/.dotfiles/scripts/01ps1-multiline
+else
+	. ~/.dotfiles/scripts/01ps1-singleline
+fi
+
 . ~/.dotfiles/scripts/02aliases
 . ~/.dotfiles/scripts/03environment
 
 if [ ${RUN_SSH_AGENT:-0} -eq 1 ]; then
+	if [ $"IS_ROOT" = 1 ]; then
+		echo "${YELLOW}Starting ssh-agent as ${RED}root${RESET}"
+	fi
 	. ~/.dotfiles/scripts/10ssh-agent
 fi
 
-if [ ${SAVE_HISTORY:-0} -eq 0 ]; then
+if [ ${SAVE_HISTORY:-1} -eq 0 ]; then
 	. ~/.dotfiles/scripts/20history
 fi

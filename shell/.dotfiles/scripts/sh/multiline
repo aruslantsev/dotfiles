@@ -1,27 +1,30 @@
-. ~/.dotfiles/scripts/bash/colors
 . ~/.dotfiles/scripts/timer
 . ~/.dotfiles/scripts/system
 . ~/.dotfiles/scripts/devtools
 
-if [ "$UID" = 0 ] || [ $(whoami) = "root" ]; then
-	IS_ROOT=1
-else
-	IS_ROOT=0
-fi
 if [ "$IS_ROOT" = 1 ]; then
 	OK_COLOR=$GREY
-else 
+else
 	OK_COLOR=$GREEN
 fi
 ERR_COLOR=$RED
 
-EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}|\$(get_exectime)]\"; echo \"${RESET}\")"
+case ${SHELL##*/} in
+	"bash")
+		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}|\$(get_exectime)]\"; echo \"${RESET}\")"
+		;;
+	"sh")
+		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}]\"; echo \"${RESET}\")"
+		;;
+	*)
+		echo "Unsupported shell ${SHELL##*/}"
+esac
 
 DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \"\n│  ${GREY}\${status_str}${RESET}\"; else echo -n; fi)"
 
 SYSTEM_LOAD="${GREY}\$(get_system_load)${RESET}"
 
-TIME="${GREY}\D{%F %T}.${RESET}"
+TIME="${GREY}\$(date +\"%F %T\").${RESET}"
 
 SSH="\$(if [ ! -z \"\${SSH_CONNECTION}\" ]; then echo \"${YELLOW}[SSH]${RESET} \"; fi)"
 

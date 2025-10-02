@@ -1,0 +1,10 @@
+case ${SHELL##*/} in
+	"bash" | "sh")
+		. ~/.dotfiles/scripts/sh/singleline
+		;;
+	"zsh")
+		. ~/.dotfiles/scripts/zsh/singleline
+		;;
+	*)
+		echo "Unsupported shell ${SHELL##*/}"
+esac
