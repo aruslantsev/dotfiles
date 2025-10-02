@@ -29,8 +29,8 @@ fi
 . ~/.dotfiles/scripts/03environment
 
 if [ ${RUN_SSH_AGENT:-0} -eq 1 ]; then
-	if [ $"IS_ROOT" = 1 ]; then
-		echo "${YELLOW}Starting ssh-agent as ${RED}root${RESET}"
+	if [ "$IS_ROOT" = 1 ]; then
+		echo -e "${YELLOW}Starting ssh-agent as ${RED}root${RESET}"
 	fi
 	. ~/.dotfiles/scripts/10ssh-agent
 fi

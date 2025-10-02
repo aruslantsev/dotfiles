@@ -2,7 +2,7 @@ if [ -z "$OSTYPE" ]; then
 	os_name=$(uname)
 	case ${os_name} in
 		Linux)
-			OSTYPE="linux-gnu"
+			OSTYPE="linux"
 			;;
 		Darwin)
 			OSTYPE="darwin"
@@ -16,9 +16,8 @@ if [ -z "$OSTYPE" ]; then
 	echo "OSTYPE is not set. Guessed $OSTYPE"
 fi
 
-
 case "$OSTYPE" in
-	linux-gnu*)
+	linux*)
 		# total_cpus=$(grep processor /proc/cpuinfo | wc -l)
 		total_mem_mb=$(free -m | awk 'NR==2{printf $2 }')
 
