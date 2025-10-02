@@ -1,4 +1,4 @@
-. ~/.dotfiles/scripts/system
+
 . ~/.dotfiles/scripts/timer
 . ~/.dotfiles/scripts/devtools
 

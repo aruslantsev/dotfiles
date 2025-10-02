@@ -1,6 +1,5 @@
 setopt PROMPT_SUBST
 
-. ~/.dotfiles/scripts/zsh/colors
 . ~/.dotfiles/scripts/timer
 . ~/.dotfiles/scripts/devtools
 

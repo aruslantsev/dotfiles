@@ -2,7 +2,6 @@ setopt PROMPT_SUBST
 
 NEWLINE=$'\n'
 
-. ~/.dotfiles/scripts/zsh/colors
 . ~/.dotfiles/scripts/timer
 . ~/.dotfiles/scripts/system
 . ~/.dotfiles/scripts/devtools
