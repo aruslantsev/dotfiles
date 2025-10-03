@@ -1,10 +1,12 @@
-case ${SHELL##*/} in
-	"bash" | "zsh")
-		unset HISTFILE
-		;;
-	"sh")
-		HISTFILE=/dev/null
-		;;
-	"*")
-		echo "Unknown shell"
-esac
+if [ ${SAVE_HISTORY:-1} -eq 0 ]; then
+	case ${SHELL##*/} in
+		"bash" | "zsh")
+			unset HISTFILE
+			;;
+		"sh")
+			HISTFILE=/dev/null
+			;;
+		"*")
+			echo "Unknown shell"
+	esac
+fi

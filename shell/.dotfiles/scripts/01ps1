@@ -1,0 +1,9 @@
+. ~/.dotfiles/scripts/${SHELL_NAME}/ps1-colors
+
+if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
+	. ~/.dotfiles/scripts/${SHELL_NAME}/simple
+elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
+	. ~/.dotfiles/scripts/${SHELL_NAME}/multiline
+else
+	. ~/.dotfiles/scripts/${SHELL_NAME}/singleline
+fi

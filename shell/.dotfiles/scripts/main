@@ -6,35 +6,26 @@ fi
 
 case ${SHELL##*/} in
 	"bash" | "sh")
-		. ~/.dotfiles/scripts/colors-sh
+		SHELL_NAME="sh"
 		;;
 	"zsh")
-		. ~/.dotfiles/scripts/colors-zsh
+		SHELL_NAME="zsh"
 		;;
 	*)
+		SHELL_NAME=""
 		echo "Unsupported shell ${SHELL##*/}"
 esac
 
-. ~/.dotfiles/scripts/00path
-
-if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
-	. ~/.dotfiles/scripts/01ps1-simple
-elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
-	. ~/.dotfiles/scripts/01ps1-multiline
-else
-	. ~/.dotfiles/scripts/01ps1-singleline
-fi
-
-. ~/.dotfiles/scripts/02aliases
-. ~/.dotfiles/scripts/03environment
-
-if [ ${RUN_SSH_AGENT:-0} -eq 1 ]; then
-	if [ "$IS_ROOT" = 1 ]; then
-		echo -e "${YELLOW}Starting ssh-agent as ${RED}root${RESET}"
-	fi
+if [ ! -z "${SHELL_NAME}" ]; then
+	. ~/.dotfiles/scripts/00path
+	. ~/.dotfiles/scripts/01ps1
+	. ~/.dotfiles/scripts/02aliases
+	. ~/.dotfiles/scripts/03environment
 	. ~/.dotfiles/scripts/10ssh-agent
-fi
-
-if [ ${SAVE_HISTORY:-1} -eq 0 ]; then
 	. ~/.dotfiles/scripts/20history
 fi
+
+
+
+
+

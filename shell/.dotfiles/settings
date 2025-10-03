@@ -1,3 +1,6 @@
+# History
+export SAVE_HISTORY=0
+
 # Select prompt
 # Simple prompt: user@host $. No execution time, return code, development tools or anything else in prompt
 export SIMPLE_PROMPT=0

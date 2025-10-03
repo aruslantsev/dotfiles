@@ -1,35 +1,34 @@
-
 . ~/.dotfiles/scripts/timer
 . ~/.dotfiles/scripts/devtools
 
 if [ "$IS_ROOT" = 1 ]; then
-	OK_COLOR=$GREY
+	OK_COLOR=$PS1_GREY
 else
-	OK_COLOR=$GREEN
+	OK_COLOR=$PS1_GREEN
 fi
-ERR_COLOR=$RED
+ERR_COLOR=$PS1_RED
 
 
 case ${SHELL##*/} in
 	"bash")
-		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}|\$(get_exectime)]\"; echo \"${RESET}\")"
+		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}|\$(get_exectime)]\"; echo \"${PS1_RESET}\")"
 		;;
 	"sh")
-		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}]\"; echo \"${RESET}\")"
+		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}]\"; echo \"${PS1_RESET}\")"
 		;;
 	*)
 		echo "Unsupported shell ${SHELL##*/}"
 esac
 
-DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \" ${GREY}\${status_str}${RESET}\"; else echo -n; fi)"
+DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \" ${PS1_GREY}\${status_str}${PS1_RESET}\"; else echo -n; fi)"
 
-TIME="${GREY}\$(date +\"%F %T\").${RESET}"
+TIME="${PS1_GREY}\$(date +\"%F %T\").${PS1_RESET}"
 
-SSH="\$(if [ ! -z \"\${SSH_CONNECTION}\" ]; then echo \"${YELLOW}[SSH]${RESET} \"; fi)"
+SSH="\$(if [ ! -z \"\${SSH_CONNECTION}\" ]; then echo \"${PS1_YELLOW}[SSH]${PS1_RESET} \"; fi)"
 
 if [ "$IS_ROOT" = 1 ]; then
-	PS1="\[\e]0;\u@\h:\w\a\]${RED}\h ${BLUE}\w \\\$${RESET}"
+	PS1="${PS1_RED}\h ${PS1_BLUE}\w \\\$${PS1_RESET}"
 else
-	PS1="\[\e]0;\u@\h:\w\a\]${GREEN}\u@\h ${BLUE}\w \\\$${RESET}"
+	PS1="${PS1_GREEN}\u@\h ${PS1_BLUE}\w \\\$${PS1_RESET}"
 fi
 PS1="${EXITCODE} ${SSH}${TIME}${DEVTOOLS_STR} ${PS1} "

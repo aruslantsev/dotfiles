@@ -6,32 +6,27 @@ NEWLINE=$'\n'
 . ~/.dotfiles/scripts/system
 . ~/.dotfiles/scripts/devtools
 
-if [ "$UID" = 0 ] || [ $(whoami) = "root" ]; then
-	IS_ROOT=1
-else
-	IS_ROOT=0
-fi
 if [ "$IS_ROOT" = 1 ]; then
-	OK_COLOR=$GREY
+	OK_COLOR=$PS1_GREY
 else
-	OK_COLOR=$GREEN
+	OK_COLOR=$PS1_GREEN
 fi
-ERR_COLOR=$RED
+ERR_COLOR=$PS1_RED
 
-EXITCODE='$(exitcode=$?; if [ ${exitcode} = 0 ]; then echo -ne "${OK_COLOR}"; else echo -ne "${ERR_COLOR}"; fi; echo -n "[${exitcode}|$(get_exectime)]"; echo -e "${RESET}")'
+EXITCODE='$(exitcode=$?; if [ ${exitcode} = 0 ]; then echo -ne "${OK_COLOR}"; else echo -ne "${ERR_COLOR}"; fi; echo -n "[${exitcode}|$(get_exectime)]"; echo -e "${PS1_RESET}")'
 
-DEVTOOLS_STR='$(status_str=$(get_devtools_str); if [ -n "${status_str}" ]; then echo -e "${NEWLINE}│  ${GREY}${status_str}${RESET}"; else echo -n; fi)'
+DEVTOOLS_STR='$(status_str=$(get_devtools_str); if [ -n "${status_str}" ]; then echo -e "${NEWLINE}│  ${PS1_GREY}${status_str}${PS1_RESET}"; else echo -n; fi)'
 
-SYSTEM_LOAD='$(echo -e "${GREY}$(get_system_load)${RESET}")'
+SYSTEM_LOAD='$(echo -e "${PS1_GREY}$(get_system_load)${PS1_RESET}")'
 
-TIME='${GREY}%D{%F %T}.${RESET}'
+TIME='${PS1_GREY}%D{%F %T}.${PS1_RESET}'
 
-SSH='$(if [ ! -z "${SSH_CONNECTION}" ]; then echo -e "${YELLOW}[SSH]${RESET} "; fi)'
+SSH='$(if [ ! -z "${SSH_CONNECTION}" ]; then echo -e "${PS1_YELLOW}[SSH]${PS1_RESET} "; fi)'
 
 if [ "$IS_ROOT" = 1 ]; then
-	PS1='${RED}%n@%m ${BLUE}%~ %#${RESET}'
+	PS1='${PS1_RED}%m ${PS1_BLUE}%~ %#${PS1_RESET}'
 else
-	PS1='${GREEN}%n@%m ${BLUE}%~ %#${RESET}'
+	PS1='${PS1_GREEN}%n@%m ${PS1_BLUE}%~ %#${PS1_RESET}'
 fi
 PS1="┌─ ${EXITCODE} ${TIME} ${SYSTEM_LOAD} ${DEVTOOLS_STR}${NEWLINE}└─ ${SSH}${PS1} "
 
