@@ -1,0 +1,20 @@
+case ${SHELL_NAME} in
+	"bash" | "ash" | "sh")
+		. ~/.dotfiles/scripts/colors-sh
+		;;
+	"zsh")
+		. ~/.dotfiles/scripts/colors-zsh
+		;;
+esac
+
+print_err () {
+	echo -e "${RED}[ERROR]${RESET} $1"
+}
+
+print_warn () {
+	echo -e "${YELLOW}[WARNING]${RESET} $1"
+}
+
+print_info () {
+	echo -e "${BLUE}[INFO]${RESET} $1"
+}

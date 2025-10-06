@@ -1,9 +1,18 @@
-. ~/.dotfiles/scripts/${SHELL_NAME}/ps1-colors
+case $SHELL_NAME in
+	"bash" | "ash" | "sh")
+		PROMPT_SOURCE="sh"
+		;;
+	"zsh")
+		PROMPT_SOURCE="zsh"
+		;;
+esac
+
+. ~/.dotfiles/scripts/${PROMPT_SOURCE}/ps1-colors
 
 if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
-	. ~/.dotfiles/scripts/${SHELL_NAME}/simple
+	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/simple
 elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
-	. ~/.dotfiles/scripts/${SHELL_NAME}/multiline
+	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/multiline
 else
-	. ~/.dotfiles/scripts/${SHELL_NAME}/singleline
+	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/singleline
 fi

@@ -1,9 +1,9 @@
 if [ ${SHOW_CONDA_STATUS:-0} -eq 1 ] && [ -d ~/miniconda3 ]; then
-	eval "$(~/miniconda3/bin/conda shell.${SHELL##*/} hook)"
+	eval "$(~/miniconda3/bin/conda shell.${SHELL_NAME} hook)"
 	conda deactivate
 
 	if [ ! -f ~/.condarc ]; then
-		echo "~/.condarc is missing, creating it now"
+		print_warn "~/.condarc is missing, creating it now"
 		touch ~/.condarc
 	fi
 	grep -i "changeps1:[[:space:]]?*false" ~/.condarc > /dev/null || conda config --set changeps1 False

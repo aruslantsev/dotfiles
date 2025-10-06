@@ -1,7 +1,5 @@
-. ~/.dotfiles/aliases
-
-if [ -f ~/.${SHELL##*/}_aliases ]; then
-	. ~/.${SHELL##*/}_aliases
+if [ -f ~/.${SHELL_NAME}_aliases ]; then
+	. ~/.${SHELL_NAME}_aliases
 fi
 
 if [ -f ~/.aliases ]; then

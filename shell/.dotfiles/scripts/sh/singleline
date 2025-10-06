@@ -9,15 +9,13 @@ fi
 ERR_COLOR=$PS1_RED
 
 
-case ${SHELL##*/} in
+case ${SHELL_NAME} in
 	"bash")
 		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}|\$(get_exectime)]\"; echo \"${PS1_RESET}\")"
 		;;
-	"sh")
+	"sh" | "ash")
 		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}]\"; echo \"${PS1_RESET}\")"
 		;;
-	*)
-		echo "Unsupported shell ${SHELL##*/}"
 esac
 
 DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \" ${PS1_GREY}\${status_str}${PS1_RESET}\"; else echo -n; fi)"

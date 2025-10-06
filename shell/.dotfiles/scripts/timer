@@ -33,7 +33,7 @@ get_exectime () {
 	convert_time timer_show
 }
 
-case ${SHELL##*/} in
+case ${SHELL_NAME} in
 	"bash")
 		trap 'timer_start' DEBUG
 		PROMPT_COMMAND=timer_stop

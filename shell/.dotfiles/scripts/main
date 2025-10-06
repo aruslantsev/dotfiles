@@ -1,20 +1,21 @@
+SHELL_NAME=$(echo ${0##*/} | sed 's/^-*//')  # ${SHELL##*/} is login shell
+case $SHELL_NAME in
+	"bash" | "sh" | "ash" | "zsh")
+		;;
+	*)
+		echo "Unsupported shell ${SHELL_NAME}"
+		SHELL_NAME=""
+esac
+
+. ~/.dotfiles/scripts/messages
+
 if [ "$UID" = 0 ] || [ $(whoami) = "root" ]; then
 	IS_ROOT=1
+	print_warn "Runnung as root"
 else
 	IS_ROOT=0
 fi
 
-case ${SHELL##*/} in
-	"bash" | "sh")
-		SHELL_NAME="sh"
-		;;
-	"zsh")
-		SHELL_NAME="zsh"
-		;;
-	*)
-		SHELL_NAME=""
-		echo "Unsupported shell ${SHELL##*/}"
-esac
 
 if [ ! -z "${SHELL_NAME}" ]; then
 	. ~/.dotfiles/scripts/00path
@@ -24,8 +25,3 @@ if [ ! -z "${SHELL_NAME}" ]; then
 	. ~/.dotfiles/scripts/10ssh-agent
 	. ~/.dotfiles/scripts/20history
 fi
-
-
-
-
-
