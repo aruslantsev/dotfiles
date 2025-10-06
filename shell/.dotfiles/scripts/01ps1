@@ -7,12 +7,12 @@ case $SHELL_NAME in
 		;;
 esac
 
-. ~/.dotfiles/scripts/${PROMPT_SOURCE}/ps1-colors
+if [ ${USE_COLORS:-0} -eq 1 ]; then
+	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/ps1-colors
+fi
 
 if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
 	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/simple
-elif [ ${MULTILINE_PROMPT:-0} -eq 1 ]; then
-	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/multiline
 else
-	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/singleline
+	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/multiline
 fi

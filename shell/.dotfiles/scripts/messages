@@ -1,11 +1,13 @@
-case ${SHELL_NAME} in
-	"bash" | "ash" | "sh")
-		. ~/.dotfiles/scripts/colors-sh
-		;;
-	"zsh")
-		. ~/.dotfiles/scripts/colors-zsh
-		;;
-esac
+if [ ${USE_COLORS:-0} -eq 1 ]; then
+    case ${SHELL_NAME} in
+        "bash" | "ash" | "sh")
+            . ~/.dotfiles/scripts/colors-sh
+            ;;
+        "zsh")
+            . ~/.dotfiles/scripts/colors-zsh
+            ;;
+    esac
+fi
 
 print_err () {
 	echo -e "${RED}[ERROR]${RESET} $1"

@@ -1,12 +1,14 @@
 # History
 export SAVE_HISTORY=0
 
-# Select prompt
+# Colors
+export USE_COLORS=1
+
+# Prompt
 # Simple prompt: user@host $. No execution time, return code, development tools or anything else in prompt
+# If SIMPLE_PROMPT == 0, enabled more useful prompt. Contains execution time, return code, date, time,
+# load average, RAM and swap usage, information about git, conda env, ESP IDF
 export SIMPLE_PROMPT=0
-# If SIMPLE_PROMPT == 0, enabled more useful prompt. Contains execution time, return code, information about git and conda env.
-# This prompt can be single and multiline. Multiline prompt contains load average, RAM usage
-export MULTILINE_PROMPT=1
 
 # Autostart ssh-agent
 export RUN_SSH_AGENT=1
@@ -19,5 +21,5 @@ export SHOW_CONDA_STATUS=1
 # Show ESP IDF version
 export SHOW_IDF_STATUS=1
 
-# Aliases can be set in ~/.{bash,zsh}_aliases or ~/.aliases
+# Aliases can be set in ~/.{bash,zsh,...}_aliases and ~/.aliases
 # Environment variables can be set in ~/.environment
