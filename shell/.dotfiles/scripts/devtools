@@ -1,56 +1,56 @@
 if [ ${SHOW_CONDA_STATUS:-0} -eq 1 ] && [ -d ~/miniconda3 ]; then
-	eval "$(~/miniconda3/bin/conda shell.${SHELL##*/} hook)"
+	eval "$(~/miniconda3/bin/conda shell.${SHELL_NAME} hook)"
 	conda deactivate
 
 	if [ ! -f ~/.condarc ]; then
-		echo "~/.condarc is missing, creating it now"
+		print_warn "~/.condarc is missing, creating it now"
 		touch ~/.condarc
 	fi
 	grep -i "changeps1:[[:space:]]?*false" ~/.condarc > /dev/null || conda config --set changeps1 False
 
-	function get_conda_env {
+	get_conda_env () {
 		if [ ! -z "${CONDA_DEFAULT_ENV}" ]; then
 			echo "Conda: ${CONDA_DEFAULT_ENV}"
 		fi
 	}
 else
-	function get_conda_env {
+	get_conda_env () {
 		echo -n
 	}
 fi
 
-if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] && [ $(which git 2> /dev/null) ]; then
-	source ~/.dotfiles/scripts/git_prompt.sh
+if [ ${SHOW_GIT_STATUS:-0} -eq 1 ] && [ ! -z "$(which git 2> /dev/null)" ]; then
+	. ~/.dotfiles/scripts/git_prompt.sh
 	export GIT_PS1_SHOWDIRTYSTATE=1
 	export GIT_PS1_SHOWSTASHSTATE=1
 	export GIT_PS1_SHOWUNTRACKEDFILES=1
 	export GIT_PS1_SHOWUPSTREAM=auto
 
-	function get_git_status {
+	get_git_status () {
 		git_status=$(__git_ps1)
 		if [ -n "${git_status}" ]; then
 			echo "Git: ${git_status}" | xargs
 		fi
 	}
 else
-	function get_git_status {
+	get_git_status () {
 		echo -n
 	}
 fi
 
 if [ ${SHOW_IDF_STATUS:-0} -eq 1 ]; then
-	function get_idf_version {
+	get_idf_version () {
 		if [ ! -z "${ESP_IDF_VERSION}" ]; then
 			echo "ESP IDF: ${ESP_IDF_VERSION}"
 		fi
 	}
 else
-	function get_idf_version {
+	get_idf_version () {
 		echo -n
 	}
 fi
 
-function get_devtools_str {
+get_devtools_str () {
 	STATUS_STR=""
 	git_status="$(get_git_status)"
 	conda_env="$(get_conda_env)"

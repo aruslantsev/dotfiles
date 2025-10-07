@@ -1,25 +1,2 @@
-# Select prompt
-# Simple prompt: user@host $. No execution time, return code, development tools or anything else in prompt
-export SIMPLE_PROMPT=0
-# If SIMPLE_PROMPT == 0, enabled more useful prompt. Contains execution time, return code, information about git and conda env.
-# This prompt can be single and multiline. Multiline prompt contains load average, RAM usage
-export MULTILINE_PROMPT=1
-
-# Autostart ssh-agent
-export RUN_SSH_AGENT=1
-
-# Development tools
-# Show git status (branch, staged files, etc.) in prompt
-export SHOW_GIT_STATUS=1
-# Show conda environment in prompt
-export SHOW_CONDA_STATUS=1
-# Show ESP IDF version
-export SHOW_IDF_STATUS=1
-
-# Do not save command history
-unset HISTFILE
-
-source ~/.dotfiles/scripts/main
-
-# Aliases can be set in ~/.{bash,zsh}_aliases
-# Environment variables can be set in ~/.environment
+. ~/.dotfiles/settings
+. ~/.dotfiles/scripts/main
