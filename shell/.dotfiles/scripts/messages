@@ -1,12 +1,5 @@
 if [ ${USE_COLORS:-0} -eq 1 ]; then
-    case ${SHELL_NAME} in
-        "bash" | "ash" | "sh")
-            . ~/.dotfiles/scripts/colors-sh
-            ;;
-        "zsh")
-            . ~/.dotfiles/scripts/colors-zsh
-            ;;
-    esac
+    . ~/.dotfiles/scripts/colors-sh
 fi
 
 print_err () {

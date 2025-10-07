@@ -27,9 +27,9 @@ TIME="${PS1_GREY}\$(date +\"%F %T\").${PS1_RESET}"
 SSH="\$(if [ ! -z \"\${SSH_CONNECTION}\" ]; then echo \"${PS1_YELLOW}[SSH]${PS1_RESET} \"; fi)"
 
 if [ "$IS_ROOT" = 1 ]; then
-	PS1="${PS1_RED}\h ${PS1_BLUE}\w \\\$${PS1_RESET}"
+	PS1="\[\e]0;\u@\h:\w\a\]${PS1_RED}\h ${PS1_BLUE}\w \\\$${PS1_RESET}"
 else
-	PS1="${PS1_GREEN}\u@\h ${PS1_BLUE}\w \\\$${PS1_RESET}"
+	PS1="\[\e]0;\u@\h:\w\a\]${PS1_GREEN}\u@\h ${PS1_BLUE}\w \\\$${PS1_RESET}"
 fi
 PS1="┌─ ${EXITCODE} ${TIME} ${SYSTEM_LOAD} ${DEVTOOLS_STR}\n└─ ${SSH}${PS1} "
 
