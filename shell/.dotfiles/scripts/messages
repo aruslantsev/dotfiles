@@ -1,5 +1,5 @@
 if [ ${USE_COLORS:-0} -eq 1 ]; then
-    . ~/.dotfiles/scripts/colors-sh
+    . ~/.dotfiles/scripts/colors
 fi
 
 print_err () {
