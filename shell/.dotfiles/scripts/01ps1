@@ -1,18 +1,18 @@
-case $SHELL_NAME in
+case "$BS_SHELL_NAME" in
 	"bash" | "ash" | "sh")
-		PROMPT_SOURCE="sh"
+		BS_PROMPT_SOURCE="sh"
 		;;
 	"zsh")
-		PROMPT_SOURCE="zsh"
+		BS_PROMPT_SOURCE="zsh"
 		;;
 esac
 
 if [ ${USE_COLORS:-0} -eq 1 ]; then
-	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/ps1-colors
+	. ${BS_PATH_PREFIX}/scripts/${BS_PROMPT_SOURCE}/ps1-colors
 fi
 
 if [ ${SIMPLE_PROMPT:-0} -eq 1 ]; then
-	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/simple
+	. ${BS_PATH_PREFIX}/scripts/${BS_PROMPT_SOURCE}/simple
 else
-	. ~/.dotfiles/scripts/${PROMPT_SOURCE}/multiline
+	. ${BS_PATH_PREFIX}/scripts/${BS_PROMPT_SOURCE}/multiline
 fi

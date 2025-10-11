@@ -2,9 +2,9 @@ setopt PROMPT_SUBST
 
 NEWLINE=$'\n'
 
-. ~/.dotfiles/scripts/timer
-. ~/.dotfiles/scripts/system
-. ~/.dotfiles/scripts/devtools
+. ${BS_PATH_PREFIX}/scripts/timer
+. ${BS_PATH_PREFIX}/scripts/system
+. ${BS_PATH_PREFIX}/scripts/devtools
 
 if [ "$IS_ROOT" = 1 ]; then
 	OK_COLOR=$PS1_GREY

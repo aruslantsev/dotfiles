@@ -1,6 +1,6 @@
-. ~/.dotfiles/scripts/timer
-. ~/.dotfiles/scripts/system
-. ~/.dotfiles/scripts/devtools
+. ${BS_PATH_PREFIX}/scripts/timer
+. ${BS_PATH_PREFIX}/scripts/system
+. ${BS_PATH_PREFIX}/scripts/devtools
 
 if [ "$IS_ROOT" = 1 ]; then
 	OK_COLOR=$PS1_GREY
@@ -9,11 +9,12 @@ else
 fi
 ERR_COLOR=$PS1_RED
 
-case ${SHELL_NAME} in
+case ${BS_SHELL_NAME} in
 	"bash")
 		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}|\$(get_exectime)]\"; echo \"${PS1_RESET}\")"
 		;;
 	"sh" | "ash")
+		print_warn "Execution time in multiline prompt is not supported in ${BS_SHELL_NAME}"
 		EXITCODE="\$(exitcode=\$?; if [ \${exitcode} = 0 ]; then echo -n \"${OK_COLOR}\"; else echo -n \"${ERR_COLOR}\"; fi; echo -n \"[\${exitcode}]\"; echo \"${PS1_RESET}\")"
 		;;
 esac
