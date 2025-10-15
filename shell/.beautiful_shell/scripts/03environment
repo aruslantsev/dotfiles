@@ -1,3 +1,0 @@
-if [ -f ~/.environment ]; then
-	. ~/.environment
-fi
