@@ -19,20 +19,22 @@ case ${BS_SHELL_NAME} in
 		;;
 esac
 
+JOBS_INFO="\$(JOBS=\$(get_jobs); if [ -n \"\${JOBS}\" ]; then echo \"${PS1_YELLOW}[\${JOBS}]${PS1_RESET} \"; fi)"
+
 DEVTOOLS_STR="\$(status_str=\$(get_devtools_str); if [ -n \"\${status_str}\" ]; then echo \"\n│  ${PS1_GREY}\${status_str}${PS1_RESET}\"; else echo -n; fi)"
 
 SYSTEM_LOAD="${PS1_GREY}\$(get_system_load)${PS1_RESET}"
 
 TIME="${PS1_GREY}\$(date +\"%F %T\").${PS1_RESET}"
 
-SSH="\$(if [ ! -z \"\${SSH_CONNECTION}\" ]; then echo \"${PS1_YELLOW}[SSH]${PS1_RESET} \"; fi)"
+SSH="\$(if [ -n \"\${SSH_CONNECTION}\" ]; then echo \"${PS1_YELLOW}[SSH]${PS1_RESET} \"; fi)"
 
 if [ "$IS_ROOT" = 1 ]; then
 	PS1="\[\e]0;\u@\h:\w\a\]${PS1_RED}\h ${PS1_BLUE}\w \\\$${PS1_RESET}"
 else
 	PS1="\[\e]0;\u@\h:\w\a\]${PS1_GREEN}\u@\h ${PS1_BLUE}\w \\\$${PS1_RESET}"
 fi
-PS1="┌─ ${EXITCODE} ${TIME} ${SYSTEM_LOAD} ${DEVTOOLS_STR}\n└─ ${SSH}${PS1} "
+PS1="┌─ ${EXITCODE} ${TIME} ${SYSTEM_LOAD} ${DEVTOOLS_STR}\n└─ ${SSH}${JOBS_INFO}${PS1} "
 
 # ┌─┬─┐
 # │ │ │

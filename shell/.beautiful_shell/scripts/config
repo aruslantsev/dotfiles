@@ -184,6 +184,3 @@ bs_set_esp_idf_status () {
 		echo "Invalid value"
 	esac
 }
-
-# jobs control
-# tmux and screen
