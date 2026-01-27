@@ -1,0 +1,56 @@
+set linenumbers
+set tabsize 4
+set autoindent
+# set tabstospaces  # use spaces instead of tabs
+# set smooth  # not supported
+# set mouse
+# set positionlog  # open file at last position
+# set rebinddelete  # for ssh
+# set rebindkeypad  # for ssh
+
+# Auto wrap long strings at blanks
+# set softwrap
+# set atblanks
+
+# Scroll position
+set indicator
+
+# Search
+# set historylog
+# set casesensitive
+# set regexp
+
+# Spellchecking
+# set speller "aspell -x -c"
+
+# Backup files
+# set backup
+# set backupdir "~/.nano_backups/"
+
+# Automatically break lines
+# set fill 80
+# set breaklonglines
+
+# Custom color theme
+# set titlecolor white,black
+# set statuscolor brightcyan,black
+# set errorcolor brightred,white
+# set selectedcolor black,cyan
+# set numbercolor green,blac
+
+# Syntax highlihting
+include "/usr/share/nano/*.nanorc"
+
+# Keys
+bind ^S writeout main
+bind ^Q exit main
+bind M-U undo main
+bind M-R redo main
+bind ^F whereis all
+bind ^H help all
+
+# unbind ^X main
+unbind ^O main
+
+bind ^N nextpage help
+bind ^P prevpage help
